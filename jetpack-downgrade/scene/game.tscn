@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://d1re0r2ayt6eu"]
+
+[ext_resource type="Script" uid="uid://c43oenmbwjaxb" path="res://script/player.gd" id="1_dbls1"]
+[ext_resource type="Script" uid="uid://by37rmmr32eaf" path="res://script/game.gd" id="1_xwcet"]
+[ext_resource type="Texture2D" uid="uid://b7knhdu2kcsl" path="res://icon.svg" id="2_33cqm"]
+[ext_resource type="Script" uid="uid://bhuvydear52ad" path="res://script/marker_2d.gd" id="3_33cqm"]
+[ext_resource type="Texture2D" uid="uid://ddmjh1y6jhrn" path="res://assets/Bat Move-Sheet.png" id="3_xlg7c"]
+[ext_resource type="AudioStream" uid="uid://chl4hfawjdp4r" path="res://assets/Coin.sfxr" id="5_p1ry8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxva8"]
+radius = 14.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_qpk70"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ll5lq"]
+resource_name = "player"
+length = 3.4333334
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2333, 0.46551377, 0.69988644, 0.9352643, 1.1672715, 1.4000816, 1.6003894, 1.8333, 2.0667, 2.2667, 2.5, 2.7333333, 2.9667, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_17rxn"]
+_data = {
+&"RESET": SubResource("Animation_qpk70"),
+&"player": SubResource("Animation_ll5lq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxva8"]
+size = Vector2(1152, 126)
+
+[node name="Node2D" type="Node2D" unique_id=1073677013]
+script = ExtResource("1_xwcet")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=554026430]
+position = Vector2(60, 324)
+scale = Vector2(4, 4)
+script = ExtResource("1_dbls1")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1769600260]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_xlg7c")
+flip_h = true
+hframes = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1606936429]
+shape = SubResource("CapsuleShape2D_rxva8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D" unique_id=1202500543]
+libraries/ = SubResource("AnimationLibrary_17rxn")
+autoplay = &"player"
+speed_scale = 4.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=218894134]
+position = Vector2(64, 644)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=622297341]
+position = Vector2(512, 0)
+scale = Vector2(9, 1)
+texture = ExtResource("2_33cqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1076846943]
+position = Vector2(512, 0)
+shape = SubResource("RectangleShape2D_rxva8")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=2144909065]
+position = Vector2(998, 326)
+script = ExtResource("3_33cqm")
+
+[node name="Timer" type="Timer" parent="Marker2D" unique_id=1288449741]
+autostart = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1235496395]
+
+[node name="ScoreLabel" type="Label" parent="HUD" unique_id=606468184]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "bug"
+
+[node name="Coin" type="AudioStreamPlayer2D" parent="." unique_id=1331548313]
+stream = ExtResource("5_p1ry8")
+
+[connection signal="scored" from="Marker2D" to="." method="_on_marker_2d_scored"]
+[connection signal="timeout" from="Marker2D/Timer" to="Marker2D" method="_on_timer_timeout"]
