@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="JetpackDowngrade"
-run/main_scene="uid://d1re0r2ayt6eu"
+run/main_scene="uid://c0bq321u2qcok"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*uid://cldo1g3xqdkwl"
+SoundTrack="*uid://c0ayvdj0bsx2t"
 
 [display]
 

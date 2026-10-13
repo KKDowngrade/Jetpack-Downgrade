@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c0ayvdj0bsx2t"]
+
+[ext_resource type="AudioStream" uid="uid://dgnyuql865pqg" path="res://assets/03 - DavidKBD - Belmont Chronicles Pack - Caverns.ogg" id="1_c8pf0"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=607824016]
+stream = ExtResource("1_c8pf0")
+autoplay = true

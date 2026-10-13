@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://c6kon2cnqrktn"
+path="res://.godot/imported/Death.sfxr-22973fe174d0e61dfbd8ad96339119ff.sample"
+
+[deps]
+
+source_file="res://assets/Death.sfxr"
+dest_files=["res://.godot/imported/Death.sfxr-22973fe174d0e61dfbd8ad96339119ff.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dgnyuql865pqg"
+path="res://.godot/imported/03 - DavidKBD - Belmont Chronicles Pack - Caverns.ogg-4ca569a16e42e9f5f54ec5dd64ab391c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/03 - DavidKBD - Belmont Chronicles Pack - Caverns.ogg"
+dest_files=["res://.godot/imported/03 - DavidKBD - Belmont Chronicles Pack - Caverns.ogg-4ca569a16e42e9f5f54ec5dd64ab391c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

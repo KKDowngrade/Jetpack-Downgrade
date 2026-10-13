@@ -2,14 +2,28 @@
 
 [ext_resource type="Script" uid="uid://c43oenmbwjaxb" path="res://script/player.gd" id="1_dbls1"]
 [ext_resource type="Script" uid="uid://by37rmmr32eaf" path="res://script/game.gd" id="1_xwcet"]
-[ext_resource type="Texture2D" uid="uid://b7knhdu2kcsl" path="res://icon.svg" id="2_33cqm"]
 [ext_resource type="Script" uid="uid://bhuvydear52ad" path="res://script/marker_2d.gd" id="3_33cqm"]
 [ext_resource type="Texture2D" uid="uid://ddmjh1y6jhrn" path="res://assets/Bat Move-Sheet.png" id="3_xlg7c"]
+[ext_resource type="Script" uid="uid://c4ohgfkysstqi" path="res://script/marker_2d_2.gd" id="5_0lu6w"]
 [ext_resource type="AudioStream" uid="uid://chl4hfawjdp4r" path="res://assets/Coin.sfxr" id="5_p1ry8"]
+[ext_resource type="PackedScene" uid="uid://biw1prvlwlka7" path="res://scene/game_over_screen.tscn" id="6_i6gbm"]
+[ext_resource type="FontFile" uid="uid://cigacjjjxwxi2" path="res://assets/PressStart2P-Regular.ttf" id="6_ux4dc"]
+[ext_resource type="Script" uid="uid://cj51ryyp1jikk" path="res://scene/parallax_background_1.gd" id="7_ll5lq"]
+[ext_resource type="Texture2D" uid="uid://52ss5sn60s5e" path="res://assets/background1.png" id="8_17rxn"]
+[ext_resource type="Texture2D" uid="uid://bvq5d868b4gon" path="res://assets/background2.png" id="9_17rxn"]
+[ext_resource type="Script" uid="uid://j8dkdapochad" path="res://scene/parallax_background_2.gd" id="9_yq8tf"]
+[ext_resource type="Script" uid="uid://yhk7eu6mgf5n" path="res://scene/parallax_background_3.gd" id="11_sng2h"]
+[ext_resource type="Texture2D" uid="uid://dnegn3xcpmnb7" path="res://assets/background3.png" id="12_5g16k"]
+[ext_resource type="Script" uid="uid://dsxxe4xv7rfyj" path="res://scene/parallax_background_4.gd" id="13_81276"]
+[ext_resource type="Texture2D" uid="uid://bq58jfoxf1b38" path="res://assets/Health_04_Heart_Red_Clear.png" id="14_81276"]
+[ext_resource type="Texture2D" uid="uid://ch5hcdmjfe0l8" path="res://assets/background4b.png" id="14_ve786"]
+[ext_resource type="AudioStream" uid="uid://clgmxhqmu7sf1" path="res://assets/Damaged.sfxr" id="16_i6gbm"]
+[ext_resource type="AudioStream" uid="uid://c6kon2cnqrktn" path="res://assets/Death.sfxr" id="19_jhlss"]
+[ext_resource type="AudioStream" uid="uid://cpc3cn3f04ix" path="res://assets/Jump.sfxr" id="20_ww6yf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxva8"]
-radius = 14.0
-height = 32.0
+radius = 8.5
+height = 29.0
 
 [sub_resource type="Animation" id="Animation_qpk70"]
 length = 0.001
@@ -49,14 +63,11 @@ _data = {
 &"player": SubResource("Animation_ll5lq")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxva8"]
-size = Vector2(1152, 126)
-
 [node name="Node2D" type="Node2D" unique_id=1073677013]
 script = ExtResource("1_xwcet")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=554026430]
-position = Vector2(60, 324)
+position = Vector2(123, 325)
 scale = Vector2(4, 4)
 script = ExtResource("1_dbls1")
 
@@ -67,30 +78,27 @@ flip_h = true
 hframes = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1606936429]
+position = Vector2(0.25, -1)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_rxva8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D" unique_id=1202500543]
 libraries/ = SubResource("AnimationLibrary_17rxn")
-autoplay = &"player"
 speed_scale = 4.0
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=218894134]
-position = Vector2(64, 644)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=622297341]
-position = Vector2(512, 0)
-scale = Vector2(9, 1)
-texture = ExtResource("2_33cqm")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1076846943]
-position = Vector2(512, 0)
-shape = SubResource("RectangleShape2D_rxva8")
-
 [node name="Marker2D" type="Marker2D" parent="." unique_id=2144909065]
-position = Vector2(998, 326)
+position = Vector2(1214, 326)
 script = ExtResource("3_33cqm")
 
 [node name="Timer" type="Timer" parent="Marker2D" unique_id=1288449741]
+autostart = true
+
+[node name="Marker2D2" type="Marker2D" parent="." unique_id=648080552]
+position = Vector2(1214, 326)
+script = ExtResource("5_0lu6w")
+
+[node name="Timer" type="Timer" parent="Marker2D2" unique_id=2088681488]
+wait_time = 2.5
 autostart = true
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1235496395]
@@ -103,10 +111,80 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_ux4dc")
 text = "bug"
+
+[node name="GameOverScreen" parent="HUD" unique_id=1182888010 instance=ExtResource("6_i6gbm")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 
 [node name="Coin" type="AudioStreamPlayer2D" parent="." unique_id=1331548313]
 stream = ExtResource("5_p1ry8")
 
+[node name="ParallaxBackground1" type="ParallaxBackground" parent="." unique_id=664924757]
+script = ExtResource("7_ll5lq")
+
+[node name="Layer1" type="ParallaxLayer" parent="ParallaxBackground1" unique_id=142172919]
+motion_mirroring = Vector2(1294, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground1/Layer1" unique_id=939012639]
+position = Vector2(647, 323.5)
+scale = Vector2(1.3479167, 1.3479167)
+texture = ExtResource("8_17rxn")
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="." unique_id=1703090582]
+script = ExtResource("9_yq8tf")
+
+[node name="Layer1" type="ParallaxLayer" parent="ParallaxBackground2" unique_id=777334682]
+motion_mirroring = Vector2(1294, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/Layer1" unique_id=1702706852]
+position = Vector2(647, 323.5)
+scale = Vector2(1.3479167, 1.3479167)
+texture = ExtResource("9_17rxn")
+
+[node name="ParallaxBackground3" type="ParallaxBackground" parent="." unique_id=1051941607]
+script = ExtResource("11_sng2h")
+
+[node name="Layer1" type="ParallaxLayer" parent="ParallaxBackground3" unique_id=745303936]
+motion_mirroring = Vector2(1294, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground3/Layer1" unique_id=293440183]
+position = Vector2(647, 323.5)
+scale = Vector2(1.3479167, 1.3479167)
+texture = ExtResource("12_5g16k")
+
+[node name="ParallaxBackground4" type="ParallaxBackground" parent="." unique_id=451535815]
+script = ExtResource("13_81276")
+
+[node name="Layer1" type="ParallaxLayer" parent="ParallaxBackground4" unique_id=1998055573]
+motion_mirroring = Vector2(1294, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground4/Layer1" unique_id=836348262]
+position = Vector2(647, 323.5)
+scale = Vector2(1.3479167, 1.3479167)
+texture = ExtResource("14_ve786")
+
+[node name="Health" type="Sprite2D" parent="." unique_id=836953370]
+position = Vector2(48, 48)
+scale = Vector2(3, 3)
+texture = ExtResource("14_81276")
+hframes = 5
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="." unique_id=1907396103]
+stream = ExtResource("16_i6gbm")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="." unique_id=834325201]
+stream = ExtResource("19_jhlss")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="." unique_id=1654094273]
+stream = ExtResource("20_ww6yf")
+
+[connection signal="died" from="." to="CharacterBody2D" method="_on_node_2d_died"]
 [connection signal="scored" from="Marker2D" to="." method="_on_marker_2d_scored"]
 [connection signal="timeout" from="Marker2D/Timer" to="Marker2D" method="_on_timer_timeout"]
+[connection signal="damaged" from="Marker2D2" to="." method="_on_marker_2d_2_damaged"]
+[connection signal="timeout" from="Marker2D2/Timer" to="Marker2D2" method="_on_timer_timeout"]

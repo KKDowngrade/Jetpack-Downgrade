@@ -1,3 +1,26 @@
 [gd_scene format=3 uid="uid://cm3n8nhpgeowa"]
 
-[node name="Area2D" type="Area2D" unique_id=1334179166]
+[ext_resource type="Script" uid="uid://df5eh6kx4wkho" path="res://script/spike.gd" id="1_ub7qs"]
+[ext_resource type="Texture2D" uid="uid://cfow5wktg1sgk" path="res://assets/008_2.png" id="2_ahmi3"]
+[ext_resource type="AudioStream" uid="uid://chl4hfawjdp4r" path="res://assets/Coin.sfxr" id="3_hnlp2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxva8"]
+radius = 17.362156
+
+[node name="Bee" type="Area2D" unique_id=1856815149]
+script = ExtResource("1_ub7qs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1870740035]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_rxva8")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=506334009]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_ahmi3")
+flip_h = true
+
+[node name="DamagedSound" type="AudioStreamPlayer2D" parent="." unique_id=1748468101]
+stream = ExtResource("3_hnlp2")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

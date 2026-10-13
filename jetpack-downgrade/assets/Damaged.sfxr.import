@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://clgmxhqmu7sf1"
+path="res://.godot/imported/Damaged.sfxr-21138c26e60b0d6a9244bcc7f6ca4532.sample"
+
+[deps]
+
+source_file="res://assets/Damaged.sfxr"
+dest_files=["res://.godot/imported/Damaged.sfxr-21138c26e60b0d6a9244bcc7f6ca4532.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
